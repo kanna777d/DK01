@@ -4,33 +4,364 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>guoshukai</title>
+    <title></title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+
+      body,
+      html {
+        overflow: hidden;
+        margin: 0;
+        height: 100%;
+        font-family: "Lato";
+        font-weight: 700;
+        font-size: 30px;
+        text-transform: uppercase;
+        background: #235f6f;
+        background-image: linear-gradient(-135deg, #235f6f, #333351);
+      }
+
+      .sky {
+        height: 100%;
+        display: block;
+        position: relative;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+      }
+
+      .text {
+        margin-bottom: 50vh;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+      }
+
+      .text * {
+        color: #fff;
+        padding: 0;
+        margin: 0;
+        text-align: center;
+        text-transform: none;
+        white-space: nowrap;
+      }
+
+      .text h4 {
+        font-size: 2vh;
+        opacity: 0.7;
+        font-weight: 300;
+      }
+
+      .text h1 {
+        font-size: 5vh;
+      }
+
+      .land {
+        background: #f5f5f5;
+        background-image: linear-gradient(-135deg, #f5f5f5, #cfd8ef);
+        width: 150vw;
+        height: 20vh;
+        border-radius: 100%;
+        position: absolute;
+        left: -25vw;
+        z-index: 99;
+        bottom: -10vh;
+      }
+
+      .christmastree {
+        position: absolute;
+        width: 20vw;
+        left: 40vw;
+        bottom: 12vh;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        z-index: 0;
+      }
+
+      .trunk {
+        background: chocolate;
+        height: 150px;
+        width: 30px;
+        position: absolute;
+        bottom: -4vh;
+        z-index: -99;
+      }
+
+      .star {
+        color: #ffd600;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        top: -40px;
+        display: flex;
+        justify-content: center;
+      }
+
+      .star::before {
+        content: "✯";
+        font-size: 50px;
+        line-height: 40px;
+      }
+
+      .tree {
+        width: 0;
+        height: 0;
+        color: #108b5f;
+        border-bottom-left-radius: 25%;
+        border-bottom-right-radius: 25%;
+      }
+
+      .tree1 {
+        border-bottom: 70px solid;
+        border-left: 50px solid transparent;
+        border-right: 50px solid transparent;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+      }
+      .tree1 .stripe {
+        position: absolute;
+        width: 50px;
+        height: 0px;
+        border-radius: 100%;
+        border: 20px solid transparent;
+        box-shadow: 0px 5px 0px 2px #f4614d;
+        z-index: 99;
+      }
+
+      .tree2 {
+        border-bottom: 95px solid;
+        border-left: 75px solid transparent;
+        border-right: 75px solid transparent;
+        margin-top: -50px;
+        border-bottom-left-radius: 30%;
+        border-bottom-right-radius: 30%;
+      }
+      .tree3 {
+        border-bottom: 120px solid;
+        border-left: 100px solid transparent;
+        border-right: 100px solid transparent;
+        margin-top: -70px;
+        border-bottom-left-radius: 30%;
+        border-bottom-right-radius: 30%;
+      }
+      .tree4 {
+        border-bottom: 200px solid;
+        border-left: 150px solid transparent;
+        border-right: 150px solid transparent;
+        margin-top: -100px;
+        border-bottom-left-radius: 35%;
+        border-bottom-right-radius: 35%;
+      }
+      .tree_star {
+        position: absolute;
+        animation: starRotateCW 1.5s ease-in infinite;
+        background-color: hsl(0, 0%, 90%);
+        clip-path: polygon(
+          50% 0,
+          65% 35%,
+          100% 50%,
+          65% 65%,
+          50% 100%,
+          35% 65%,
+          0 50%,
+          35% 35%
+        );
+        transform: scale(0);
+      }
+      .tree_star--2,
+      .tree_star--4,
+      .tree_star--5 {
+        animation-name: starRotateCCW;
+      }
+      .tree_star--1 {
+        animation-delay: calc(1.5s * 0.5);
+        top: 0;
+        left: 2.5em;
+        width: 1.5em;
+        height: 1.5em;
+      }
+      .tree_star--2 {
+        animation-delay: calc(1.5s * 0.125);
+        top: 2em;
+        left: 7em;
+        width: 1.75em;
+        height: 1.75em;
+      }
+      .tree_star--3 {
+        animation-delay: calc(1.5s * 0.25);
+        top: 3em;
+        left: 1em;
+        width: 1.25em;
+        height: 1.25em;
+      }
+      .tree_star--4 {
+        top: -4em;
+        right: 4em;
+        width: 1.75em;
+        height: 1.75em;
+      }
+      .tree_star--5 {
+        animation-delay: calc(1.5s * 0.375);
+        top: -2em;
+        left: 0em;
+        width: 2.5em;
+        height: 2.5em;
+      }
+      .tree_star--6 {
+        animation-delay: calc(1.5s * 0.25);
+        top: 0em;
+        left: 8em;
+        width: 1.25em;
+        height: 1.25em;
+      }
+      @keyframes starRotateCW {
+        from {
+          transform: scale(0) rotate(0);
+        }
+        25% {
+          animation-timing-function: ease-out;
+          transform: scale(1) rotate(0.25turn);
+        }
+        50%,
+        to {
+          transform: scale(0) rotate(0.5turn);
+        }
+      }
+      @keyframes starRotateCCW {
+        from {
+          transform: scale(0) rotate(0);
+        }
+        25% {
+          animation-timing-function: ease-out;
+          transform: scale(1) rotate(-0.25turn);
+        }
+        50%,
+        to {
+          transform: scale(0) rotate(-0.5turn);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div style="padding: 15px; text-align: center; background-color: aliceblue;"">
-      <img
-        src="https://s1.ax1x.com/2022/07/20/jHR6FH.jpg"
-        alt="G.E.M."
-        width="80px"
-        height="80px"
-      />
-    </div>
-    <div style="color: purple; font-size: 20px; padding: 20px; line-height: 2; max-width: 700px; height:70vh; margin: 20px auto;">
-      <p>Hello world!</p>
-      <p>I am Guoshukai.</p>
-      <p>Nice to meet you!</p>
-    </div>
-    <div
-      style="
-        padding: 15px;
-        text-align: center;
-        background-color:antiquewhite;
-      "
-    >
-      <p>Copyrights @guoshukai.com</p>
-      <a href="https://github.com/kanna777d" target="_blank" style="text-decoration-line: none"
-        >My github--></a
-      >
-    </div>
+    <section class="sky">
+      <section class="text">
+        <h1>❆ Merry Christmas ❆</h1>
+      </section>
+
+      <section class="land"></section>
+
+      <div class="christmastree">
+        <div class="trunk"></div>
+        <div class="tree_star tree_star--1" id="tree_star--1"></div>
+        <div class="tree_star tree_star--2" id="tree_star--2"></div>
+        <div class="tree_star tree_star--3" id="tree_star--3"></div>
+        <div class="tree_star tree_star--6" id="tree_star--6"></div>
+        <div class="tree_star tree_star--4" id="tree_star--4"></div>
+        <div class="tree_star tree_star--5" id="tree_star--5"></div>
+
+        <div class="tree tree1"></div>
+        <div class="tree tree2"></div>
+        <div class="tree tree3"></div>
+        <div class="tree tree4"></div>
+        <div class="star"></div>
+      </div>
+    </section>
   </body>
+  <script>
+    (function () {
+      var COUNT = 300;
+      var masthead = document.querySelector(".sky");
+      var canvas = document.createElement("canvas");
+      var ctx = canvas.getContext("2d");
+      var width = masthead.clientWidth;
+      var height = masthead.clientHeight;
+      var i = 0;
+      var active = false;
+
+      function onResize() {
+        width = masthead.clientWidth;
+        height = masthead.clientHeight;
+        canvas.width = width;
+        canvas.height = height;
+        ctx.fillStyle = "#FFF";
+
+        var wasActive = active;
+        active = width > 600;
+
+        if (!wasActive && active) requestAnimFrame(update);
+      }
+
+      var Snowflake = function () {
+        this.x = 0;
+        this.y = 0;
+        this.vy = 0;
+        this.vx = 0;
+        this.r = 0;
+
+        this.reset();
+      };
+
+      Snowflake.prototype.reset = function () {
+        this.x = Math.random() * width;
+        this.y = Math.random() * -height;
+        this.vy = 1 + Math.random() * 3;
+        this.vx = 0.5 - Math.random();
+        this.r = 1 + Math.random() * 2;
+        this.o = 0.5 + Math.random() * 0.5;
+      };
+
+      canvas.style.position = "absolute";
+      canvas.style.left = canvas.style.top = "0";
+
+      var snowflakes = [],
+        snowflake;
+      for (i = 0; i < COUNT; i++) {
+        snowflake = new Snowflake();
+        snowflake.reset();
+        snowflakes.push(snowflake);
+      }
+
+      function update() {
+        ctx.clearRect(0, 0, width, height);
+
+        if (!active) return;
+
+        for (i = 0; i < COUNT; i++) {
+          snowflake = snowflakes[i];
+          snowflake.y += snowflake.vy;
+          snowflake.x += snowflake.vx;
+
+          ctx.globalAlpha = snowflake.o;
+          ctx.beginPath();
+          ctx.arc(snowflake.x, snowflake.y, snowflake.r, 0, Math.PI * 2, false);
+          ctx.closePath();
+          ctx.fill();
+
+          if (snowflake.y > height) {
+            snowflake.reset();
+          }
+        }
+
+        requestAnimFrame(update);
+      }
+
+      // shim layer with setTimeout fallback
+      window.requestAnimFrame = (function () {
+        return (
+          window.requestAnimationFrame ||
+          window.webkitRequestAnimationFrame ||
+          window.mozRequestAnimationFrame ||
+          function (callback) {
+            window.setTimeout(callback, 1000 / 60);
+          }
+        );
+      })();
+
+      onResize();
+      window.addEventListener("resize", onResize, false);
+
+      masthead.appendChild(canvas);
+    })();
+  </script>
 </html>
